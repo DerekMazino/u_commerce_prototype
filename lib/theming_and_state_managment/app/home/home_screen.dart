@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/cart/cart_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/products/products_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 
@@ -23,7 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               ProductsScreen(),
               Text('current Index2: $currentIndex'),
-              Text('current Index3: $currentIndex'),
+              CartScreen(
+                onShoppingg: () {
+                  setState(() {
+                    currentIndex = 0;
+                  });
+                },
+              ),
               Text('current Index4: $currentIndex'),
               Text('current Index5: $currentIndex'),
             ],

@@ -5,13 +5,13 @@ final products = [
       available: true,
       image: 'assets/galletas1.jpeg',
       name: 'Galleta Red Velvet',
-      description: 'Delisiosas galletas red velvet con chispas de chocolate',
+      description: 'Deliciosas galletas red velvet con chispas de chocolate',
       price: 1200),
   Product(
       available: true,
       image: 'assets/galletas2.jpeg',
       name: 'Galleta de Coco',
-      description: 'Crocantes y delisiosas! disfrutaras cada mordida',
+      description: 'Crocantes y deliciosas! disfrutaras cada mordida',
       price: 1000),
   Product(
       available: true,
