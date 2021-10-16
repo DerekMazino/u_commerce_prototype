@@ -15,8 +15,13 @@ class DeliveryColors {
 final deliveryGradient = [DeliveryColors.green, DeliveryColors.purple];
 
 final lightTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+    color: DeliveryColors.white,
+    //textTheme: ,
+  ),
   canvasColor: DeliveryColors.white,
   accentColor: DeliveryColors.purple,
+  bottomAppBarColor: DeliveryColors.veryLightGrey,
   textTheme: GoogleFonts.poppinsTextTheme().apply(
     bodyColor: DeliveryColors.purple,
     displayColor: DeliveryColors.purple,
@@ -35,9 +40,13 @@ final lightTheme = ThemeData(
   iconTheme: IconThemeData(color: DeliveryColors.purple),
 );
 final darkTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+    color: DeliveryColors.purple,
+  ),
   canvasColor: DeliveryColors.grey,
   scaffoldBackgroundColor: DeliveryColors.dark,
   accentColor: DeliveryColors.white,
+  bottomAppBarColor: Colors.transparent,
   textTheme: GoogleFonts.poppinsTextTheme().apply(
     bodyColor: DeliveryColors.white,
     displayColor: DeliveryColors.white,

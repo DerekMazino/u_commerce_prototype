@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/home_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/login/login_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 
@@ -14,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => LoginScreen(),
+        builder: (_) => HomeScreen(),
       ));
     });
     super.initState();
