@@ -62,8 +62,8 @@ final darkTheme = ThemeData(
   accentColor: DeliveryColors.white,
   bottomAppBarColor: Colors.transparent,
   textTheme: GoogleFonts.poppinsTextTheme().apply(
-    bodyColor: DeliveryColors.white,
-    displayColor: DeliveryColors.white,
+    bodyColor: DeliveryColors.green,
+    displayColor: DeliveryColors.green,
   ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(color: DeliveryColors.green),

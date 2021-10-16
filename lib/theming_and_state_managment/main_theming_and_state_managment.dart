@@ -8,7 +8,7 @@ class MainThemingAndStateManagmentScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
-      theme: darkTheme,
+      theme: lightTheme,
     );
   }
 }

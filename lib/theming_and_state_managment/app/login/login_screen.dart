@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/home_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/widgets/delivery_button.dart';
 
 const logoSize = 45.0;
 
@@ -119,32 +120,15 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(25),
-            child: InkWell(
-              child: Container(
-                  decoration: BoxDecoration(
-                      //shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                          colors: deliveryGradient,
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft)),
-                  //height: 20,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(
-                      'Ingresar',
-                      style: TextStyle(color: DeliveryColors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
-              onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (_) => HomeScreen(),
-                ));
-              },
-            ),
-          )
+              padding: EdgeInsets.all(25),
+              child: DeliveryButton(
+                text: 'Login',
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => HomeScreen(),
+                  ));
+                },
+              ))
         ],
       ),
     );
