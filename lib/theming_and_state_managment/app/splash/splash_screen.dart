@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/login/login_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -8,6 +11,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 4), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (_) => LoginScreen(),
+      ));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -15,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
           gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [DeliveryColors.green, DeliveryColors.purple],
+        colors: deliveryGradient,
       )),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,10 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           Text('U-Commerce',
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline3!
-                  .copyWith(fontWeight: FontWeight.bold)),
+              style: Theme.of(context).textTheme.headline3!.copyWith(
+                  fontWeight: FontWeight.bold, color: DeliveryColors.white)),
         ],
       ),
     ));
