@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/cart/cart_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/products/products_screen.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/profile/profile_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               Text('current Index4: $currentIndex'),
-              Text('current Index5: $currentIndex'),
+              ProfileScreen()
             ],
           )),
           _NavigationBar(
