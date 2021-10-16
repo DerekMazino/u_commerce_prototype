@@ -17,6 +17,13 @@ final deliveryGradient = [DeliveryColors.green, DeliveryColors.purple];
 final lightTheme = ThemeData(
   appBarTheme: AppBarTheme(
     color: DeliveryColors.white,
+    titleTextStyle: GoogleFonts.poppins(
+      textStyle: TextStyle(
+          color: DeliveryColors.purple,
+          fontStyle: FontStyle.normal,
+          fontSize: 20,
+          fontWeight: FontWeight.bold),
+    ),
     //textTheme: ,
   ),
   canvasColor: DeliveryColors.white,
@@ -42,6 +49,13 @@ final lightTheme = ThemeData(
 final darkTheme = ThemeData(
   appBarTheme: AppBarTheme(
     color: DeliveryColors.purple,
+    titleTextStyle: GoogleFonts.poppins(
+      textStyle: TextStyle(
+          color: DeliveryColors.white,
+          fontStyle: FontStyle.normal,
+          fontSize: 20,
+          fontWeight: FontWeight.bold),
+    ),
   ),
   canvasColor: DeliveryColors.grey,
   scaffoldBackgroundColor: DeliveryColors.dark,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/products/products_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: IndexedStack(
             index: currentIndex,
             children: [
-              Text('current Index1: $currentIndex'),
+              ProductsScreen(),
               Text('current Index2: $currentIndex'),
               Text('current Index3: $currentIndex'),
               Text('current Index4: $currentIndex'),
