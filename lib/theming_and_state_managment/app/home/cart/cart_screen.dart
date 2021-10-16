@@ -143,6 +143,7 @@ class _ShoppingCartProduct extends StatelessWidget {
 class _FullCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var accentColor2 = Theme.of(context).accentColor;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -163,8 +164,81 @@ class _FullCart extends StatelessWidget {
             )),
         Expanded(
             flex: 2,
-            child: Container(
-              color: Colors.yellow,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                color: Theme.of(context).canvasColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'SubTotal',
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(color: accentColor2),
+                          ),
+                          Text(
+                            '\$0.0',
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(color: accentColor2),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Domicilio',
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(color: accentColor2),
+                          ),
+                          Text(
+                            'Free',
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(color: accentColor2),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Total:',
+                              style: TextStyle(
+                                  color: accentColor2,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            '\$0.0',
+                            style: TextStyle(
+                                color: accentColor2,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      DeliveryButton(onTap: () {}, text: 'Comprar')
+                    ],
+                  ),
+                ),
+              ),
             )),
       ],
     );
