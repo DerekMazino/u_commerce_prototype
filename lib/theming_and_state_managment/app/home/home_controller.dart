@@ -1,6 +1,7 @@
 //import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/product.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/user.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/repositories/local_storage_repository.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/repositories/user_repository.dart';
@@ -14,11 +15,12 @@ class HomeController extends GetxController {
   Rx<User>? user = User.empty().obs;
   RxInt indexSelect = 0.obs;
   RxBool isDarkThemeBool = false.obs;
-
+  RxList<Product> productList = <Product>[].obs;
   @override
   void onReady() {
     loadUser();
     loadCurrentTheme();
+    loadProducts();
     super.onReady();
   }
 
@@ -48,5 +50,10 @@ class HomeController extends GetxController {
     final token = await localStorageRepository.getToken();
     await userRepositoy.logout(token!);
     await localStorageRepository.clearAllData();
+  }
+
+  void loadProducts() async {
+    final result = await userRepositoy.getProducts();
+    productList.addAll(result);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/home_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/products/products_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/widgets/delivery_button.dart';
@@ -7,8 +8,7 @@ import 'package:u_commerce_prototype/theming_and_state_managment/data/in_memory_
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/product.dart';
 
 class ProductsScreen extends StatelessWidget {
-  final controller = Get.put<ProductsController>(
-      ProductsController(userRepositoy: Get.find()));
+  final controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
