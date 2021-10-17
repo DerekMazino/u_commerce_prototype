@@ -1,26 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:u_commerce_prototype/theming_and_state_managment/app/home/home_screen.dart';
-import 'package:u_commerce_prototype/theming_and_state_managment/app/login/login_screen.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/splash/splash_controller.dart';
+
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 
-class SplashScreen extends StatefulWidget {
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    Future.delayed(const Duration(seconds: 4), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => HomeScreen(),
-      ));
-    });
-    super.initState();
-  }
-
+class SplashScreen extends GetWidget<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
