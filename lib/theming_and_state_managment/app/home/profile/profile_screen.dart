@@ -3,9 +3,19 @@ import 'package:get/get.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/home_controller.dart';
 //import 'package:u_commerce_prototype/theming_and_state_managment/app/home/profile/profile_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/core/routes/routes_navigation.dart';
 
 class ProfileScreen extends StatelessWidget {
   final controller = Get.find<HomeController>();
+  Future<void> logout() async {
+    controller.logout();
+    Get.offAllNamed(Routes.login);
+  }
+
+  void onThemeUpdated(bool isDark) {
+    controller.updateTheme(isDark);
+    Get.changeTheme(isDark ? darkTheme : lightTheme);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +96,12 @@ class ProfileScreen extends StatelessWidget {
                                         const Text('Modo Oscuro',
                                             style: TextStyle(fontSize: 14)),
                                         const Spacer(),
-                                        Switch(value: true, onChanged: (val) {})
+                                        Obx(
+                                          () => Switch(
+                                              value: controller
+                                                  .isDarkThemeBool.value,
+                                              onChanged: onThemeUpdated),
+                                        )
                                       ],
                                     ),
                                   ],
