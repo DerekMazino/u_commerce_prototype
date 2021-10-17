@@ -8,4 +8,6 @@ class User {
   String email;
   String? image;
   String name;
+
+  factory User.empty() => User(name: '', email: '', image: null);
 }
