@@ -22,4 +22,8 @@ class HomeController extends GetxController {
       user!(value);
     });
   }
+
+  void updateIndexSelected(int index) {
+    indexSelect(index);
+  }
 }

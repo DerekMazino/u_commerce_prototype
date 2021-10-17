@@ -8,7 +8,7 @@ import 'package:u_commerce_prototype/theming_and_state_managment/app/home/profil
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
-  int currentIndex = 0;
+  //int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,29 +16,31 @@ class HomeScreen extends GetWidget<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-              child: IndexedStack(
-            index: currentIndex,
-            children: [
-              ProductsScreen(),
-              Text('current Index2: $currentIndex'),
-              CartScreen(
-                onShoppingg: () {
-                  /* setState(() {
-                    currentIndex = 0;
-                  }); */
-                },
-              ),
-              Text('current Index4: $currentIndex'),
-              ProfileScreen()
-            ],
+              child: Obx(
+            () => IndexedStack(
+              index: controller.indexSelect.value,
+              children: [
+                ProductsScreen(),
+                const Placeholder(),
+                CartScreen(
+                  onShoppingg: () {
+                    /* setState(() {
+                      currentIndex = 0;
+                    }); */
+                  },
+                ),
+                const Placeholder(),
+                ProfileScreen()
+              ],
+            ),
           )),
-          _NavigationBar(
-              index: currentIndex,
-              onIndexSelected: (index) {
-                /* setState(() {
-                  currentIndex = index;
-                }); */
-              })
+          Obx(
+            () => _NavigationBar(
+                index: controller.indexSelect.value,
+                onIndexSelected: (index) {
+                  controller.updateIndexSelected(index);
+                }),
+          )
         ],
       ),
     );
