@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/products/products_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/widgets/delivery_button.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/data/in_memory_products.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/product.dart';
 
 class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+  final controller = Get.put<ProductsController>(
+      ProductsController(userRepositoy: Get.find()));
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +20,22 @@ class ProductsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: GridView.builder(
-          padding: const EdgeInsets.all(20),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 2 / 3,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10),
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            final Product product = products[index];
-            return _ItemProduct(product: product);
-          }),
+      body: Obx(
+        () => controller.productList.isNotEmpty
+            ? GridView.builder(
+                padding: const EdgeInsets.all(20),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 2 / 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                itemCount: controller.productList.length,
+                itemBuilder: (context, index) {
+                  final Product product = controller.productList[index];
+                  return _ItemProduct(product: product);
+                })
+            : const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }
@@ -52,15 +59,17 @@ class _ItemProduct extends StatelessWidget {
             Expanded(
                 child: CircleAvatar(
                     backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                        child: Image.asset(
+                    child: Image.network(
                       product.image,
                       fit: BoxFit.cover,
-                    )))),
+                    ))),
             Expanded(
               child: Column(
                 children: [
-                  Text(product.name),
+                  Text(
+                    product.name,
+                    maxLines: 1,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
