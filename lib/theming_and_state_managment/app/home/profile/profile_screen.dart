@@ -122,7 +122,7 @@ class ProfileScreen extends StatelessWidget {
                                 style: TextStyle(color: DeliveryColors.white),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: logout,
                             color: DeliveryColors.purple,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),

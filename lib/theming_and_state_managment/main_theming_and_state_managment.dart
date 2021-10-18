@@ -11,7 +11,7 @@ class MainThemingAndStateManagmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: lightTheme,
+      theme: darkTheme,
       initialRoute: Routes.splash,
       getPages: UCommerceScrens.screns,
       initialBinding: MainBinding(),
