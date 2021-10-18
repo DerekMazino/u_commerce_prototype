@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/cart/cart_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/widgets/delivery_button.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/data/in_memory_products.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/product.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/product_cart.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key, this.onShoppingg}) : super(key: key);
+class CartScreen extends GetWidget<CartController> {
+  CartScreen({Key? key, this.onShoppingg}) : super(key: key);
   final VoidCallback? onShoppingg;
   @override
   Widget build(BuildContext context) {
@@ -17,17 +20,18 @@ class CartScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: /* _EmptyCart(
-        onShoppingg: onShoppingg,
-      ), */
-            _FullCart());
+        body: Obx(() => controller.totalItems.value == 0
+            ? _EmptyCart(
+                onShoppingg: onShoppingg,
+              )
+            : _FullCart()));
   }
 }
 
 class _ShoppingCartProduct extends StatelessWidget {
-  final Product product;
+  final ProductCart productCart;
 
-  const _ShoppingCartProduct({Key? key, required this.product})
+  const _ShoppingCartProduct({Key? key, required this.productCart})
       : super(key: key);
 
   @override
@@ -51,8 +55,8 @@ class _ShoppingCartProduct extends StatelessWidget {
                       child: CircleAvatar(
                           backgroundColor: Colors.transparent,
                           child: ClipOval(
-                              child: Image.asset(
-                            product.image,
+                              child: Image.network(
+                            productCart.product.image,
                             fit: BoxFit.cover,
                           )))),
                   const SizedBox(
@@ -62,12 +66,12 @@ class _ShoppingCartProduct extends StatelessWidget {
                     flex: 3,
                     child: Column(
                       children: [
-                        Text(product.name),
+                        Text(productCart.product.name),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
-                          product.description,
+                          productCart.product.description,
                           style: Theme.of(context)
                               .textTheme
                               .overline!
@@ -112,7 +116,7 @@ class _ShoppingCartProduct extends StatelessWidget {
                               ),
                               const Spacer(),
                               Text(
-                                '\$${product.price}',
+                                '\$${productCart.product.price}',
                                 style: TextStyle(color: DeliveryColors.green),
                               ),
                             ],
@@ -140,7 +144,7 @@ class _ShoppingCartProduct extends StatelessWidget {
   }
 }
 
-class _FullCart extends StatelessWidget {
+class _FullCart extends GetWidget<CartController> {
   @override
   Widget build(BuildContext context) {
     var accentColor2 = Theme.of(context).accentColor;
@@ -151,16 +155,18 @@ class _FullCart extends StatelessWidget {
             flex: 3,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: ListView.builder(
-                  itemCount: products.length,
-                  scrollDirection: Axis.horizontal,
-                  itemExtent: 230,
-                  itemBuilder: (context, index) {
-                    final Product product = products[index];
-                    return _ShoppingCartProduct(
-                      product: product,
-                    );
-                  }),
+              child: Obx(
+                () => ListView.builder(
+                    itemCount: controller.cartList.length,
+                    scrollDirection: Axis.horizontal,
+                    itemExtent: 230,
+                    itemBuilder: (context, index) {
+                      final product = controller.cartList[index];
+                      return _ShoppingCartProduct(
+                        productCart: product,
+                      );
+                    }),
+              ),
             )),
         Expanded(
             flex: 2,

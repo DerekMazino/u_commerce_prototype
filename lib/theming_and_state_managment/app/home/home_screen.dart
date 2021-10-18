@@ -28,6 +28,7 @@ class HomeScreen extends GetWidget<HomeController> {
                     /* setState(() {
                       currentIndex = 0;
                     }); */
+                    controller.indexSelect.value = 0;
                   },
                 ),
                 const Placeholder(),
