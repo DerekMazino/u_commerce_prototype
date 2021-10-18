@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/cart/cart_controller.dart';
 
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/cart/cart_screen.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/home_controller.dart';
@@ -51,6 +52,7 @@ class _NavigationBar extends StatelessWidget {
   final int index;
   final ValueChanged<int> onIndexSelected;
   final controller = Get.find<HomeController>();
+  final cartController = Get.find<CartController>();
   _NavigationBar({Key? key, required this.index, required this.onIndexSelected})
       : super(key: key);
 
@@ -88,16 +90,32 @@ class _NavigationBar extends StatelessWidget {
                 ),
               ),
               Material(
-                child: CircleAvatar(
-                    backgroundColor: DeliveryColors.purple,
-                    radius: 23,
-                    child: IconButton(
-                      onPressed: () => onIndexSelected(2),
-                      icon: Icon(Icons.shopping_basket),
-                      color: index == 2
-                          ? DeliveryColors.green
-                          : DeliveryColors.white,
-                    )),
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                        backgroundColor: DeliveryColors.purple,
+                        radius: 23,
+                        child: IconButton(
+                          onPressed: () => onIndexSelected(2),
+                          icon: Icon(Icons.shopping_basket),
+                          color: index == 2
+                              ? DeliveryColors.green
+                              : DeliveryColors.white,
+                        )),
+                    Positioned(
+                        right: 0,
+                        child: Obx(
+                          () => cartController.totalItems.value == 0
+                              ? const SizedBox.shrink()
+                              : CircleAvatar(
+                                  radius: 10,
+                                  backgroundColor: DeliveryColors.pink,
+                                  child: Text(cartController.totalItems.value
+                                      .toString()),
+                                ),
+                        ))
+                  ],
+                ),
               ),
               Material(
                 child: IconButton(

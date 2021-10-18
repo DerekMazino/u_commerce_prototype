@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/home/cart/cart_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/home_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/home/products/products_controller.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
@@ -9,7 +10,7 @@ import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/pr
 
 class ProductsScreen extends StatelessWidget {
   final controller = Get.find<HomeController>();
-
+  final cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +33,11 @@ class ProductsScreen extends StatelessWidget {
                 itemCount: controller.productList.length,
                 itemBuilder: (context, index) {
                   final Product product = controller.productList[index];
-                  return _ItemProduct(product: product);
+                  return _ItemProduct(
+                      product: product,
+                      onTap: () {
+                        cartController.add(product);
+                      });
                 })
             : const Center(child: CircularProgressIndicator()),
       ),
@@ -42,8 +47,9 @@ class ProductsScreen extends StatelessWidget {
 
 class _ItemProduct extends StatelessWidget {
   final Product product;
-
-  const _ItemProduct({Key? key, required this.product}) : super(key: key);
+  final VoidCallback onTap;
+  const _ItemProduct({Key? key, required this.product, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,11 +101,7 @@ class _ItemProduct extends StatelessWidget {
             DeliveryButton(
                 padding: EdgeInsets.symmetric(vertical: 4),
                 text: 'Agregar',
-                onTap: () {
-                  /* Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (_) => HomeScreen(),
-                  )); */
-                })
+                onTap: onTap)
           ],
         ),
       ),
