@@ -5,6 +5,8 @@ import 'package:u_commerce_prototype/theming_and_state_managment/core/injector/m
 import 'package:u_commerce_prototype/theming_and_state_managment/core/routes/routes_navigation.dart';
 
 class MainThemingAndStateManagmentScreen extends StatelessWidget {
+  const MainThemingAndStateManagmentScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

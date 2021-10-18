@@ -55,4 +55,9 @@ class CartController extends GetxController {
     cartList.value = List<ProductCart>.from(cartList);
     calculateTotals(cartList);
   }
+
+  void shopping() {
+    cartList.clear();
+    calculateTotals(cartList);
+  }
 }

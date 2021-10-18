@@ -259,7 +259,8 @@ class _FullCart extends GetWidget<CartController> {
                         ],
                       ),
                       Spacer(),
-                      DeliveryButton(onTap: () {}, text: 'Comprar')
+                      DeliveryButton(
+                          onTap: controller.shopping, text: 'Comprar')
                     ],
                   ),
                 ),

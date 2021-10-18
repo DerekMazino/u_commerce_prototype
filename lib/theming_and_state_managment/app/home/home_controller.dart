@@ -1,6 +1,7 @@
 //import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:u_commerce_prototype/theming_and_state_managment/app/theme.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/product.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/user.dart';
 import 'package:u_commerce_prototype/theming_and_state_managment/domain/repositories/local_storage_repository.dart';
