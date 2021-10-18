@@ -6,6 +6,8 @@ import 'package:u_commerce_prototype/theming_and_state_managment/domain/model/pr
 class CartController extends GetxController {
   RxList<ProductCart> cartList = <ProductCart>[].obs;
   RxInt totalItems = 0.obs;
+  RxDouble totalPrice = 0.0.obs;
+
   void add(Product product) {
     final List<ProductCart> temp = List.from(cartList);
     bool found = false;
@@ -20,10 +22,37 @@ class CartController extends GetxController {
       temp.add(ProductCart(product: product));
     }
     cartList.value = List<ProductCart>.from(temp);
+    calculateTotals(temp);
+  }
+
+  void increment(ProductCart productCart) {
+    productCart.quantity += 1;
+    cartList.value = List<ProductCart>.from(cartList);
+    calculateTotals(cartList);
+  }
+
+  void remove(ProductCart productCart) {
+    if (productCart.quantity > 1) {
+      productCart.quantity -= 1;
+      cartList.value = List<ProductCart>.from(cartList);
+      calculateTotals(cartList);
+    }
+  }
+
+  void calculateTotals(List<ProductCart> temp) {
     final int total = temp.fold(
         0, (previousValue, element) => element.quantity + previousValue);
     totalItems(total);
+    final double totalCost = temp.fold(
+        0.0,
+        (previousValue, element) =>
+            (element.quantity * element.product.price) + previousValue);
+    totalPrice(totalCost);
   }
 
-  void remove(Product product) {}
+  void deleteProduct(ProductCart productCart) {
+    cartList.remove(productCart);
+    cartList.value = List<ProductCart>.from(cartList);
+    calculateTotals(cartList);
+  }
 }

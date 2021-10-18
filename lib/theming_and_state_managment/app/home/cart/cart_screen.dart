@@ -30,8 +30,15 @@ class CartScreen extends GetWidget<CartController> {
 
 class _ShoppingCartProduct extends StatelessWidget {
   final ProductCart productCart;
-
-  const _ShoppingCartProduct({Key? key, required this.productCart})
+  final VoidCallback onDelete;
+  final VoidCallback onIncrement;
+  final VoidCallback onDecrement;
+  const _ShoppingCartProduct(
+      {Key? key,
+      required this.productCart,
+      required this.onDelete,
+      required this.onIncrement,
+      required this.onDecrement})
       : super(key: key);
 
   @override
@@ -87,23 +94,23 @@ class _ShoppingCartProduct extends StatelessWidget {
                           child: Row(
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: onDecrement,
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: DeliveryColors.white,
                                       borderRadius: BorderRadius.circular(4)),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.remove,
                                     color: Colors.black,
                                   ),
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                child: Text('0'),
-                              ),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text(productCart.quantity.toString())),
                               InkWell(
-                                onTap: () {},
+                                onTap: onIncrement,
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: DeliveryColors.purple,
@@ -136,7 +143,7 @@ class _ShoppingCartProduct extends StatelessWidget {
                   backgroundColor: DeliveryColors.pink,
                   child: Icon(Icons.delete_outline),
                 ),
-                onTap: () {},
+                onTap: onDelete,
               )),
         ],
       ),
@@ -163,8 +170,16 @@ class _FullCart extends GetWidget<CartController> {
                     itemBuilder: (context, index) {
                       final product = controller.cartList[index];
                       return _ShoppingCartProduct(
-                        productCart: product,
-                      );
+                          productCart: product,
+                          onDelete: () {
+                            controller.deleteProduct(product);
+                          },
+                          onIncrement: () {
+                            controller.increment(product);
+                          },
+                          onDecrement: () {
+                            controller.remove(product);
+                          });
                     }),
               ),
             )),
@@ -191,12 +206,14 @@ class _FullCart extends GetWidget<CartController> {
                                 .caption!
                                 .copyWith(color: accentColor2),
                           ),
-                          Text(
-                            '\$0.0',
-                            style: Theme.of(context)
-                                .textTheme
-                                .caption!
-                                .copyWith(color: accentColor2),
+                          Obx(
+                            () => Text(
+                              '\$${controller.totalPrice.value.toStringAsFixed(2)} co',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption!
+                                  .copyWith(color: accentColor2),
+                            ),
                           ),
                         ],
                       ),
@@ -230,12 +247,14 @@ class _FullCart extends GetWidget<CartController> {
                                   color: accentColor2,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold)),
-                          Text(
-                            '\$0.0',
-                            style: TextStyle(
-                                color: accentColor2,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
+                          Obx(
+                            () => Text(
+                              '\$${controller.totalPrice.value.toStringAsFixed(2)} co',
+                              style: TextStyle(
+                                  color: accentColor2,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ],
                       ),
